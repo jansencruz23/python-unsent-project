@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
-from .models import Record
+from .models import Letter
 
 
 def home(request):
-    records = Record.objects.all()
-
-
+    letters = Letter.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -22,7 +21,7 @@ def home(request):
             messages.success(request, 'An error occurred. Try again')
             return redirect('home')
     else:
-        return render(request, 'home.html', {'records':records})
+        return render(request, 'home.html', {'letters':letters})
 
 
 def login_user(request):
@@ -54,51 +53,53 @@ def register_user(request):
     return render(request, 'register.html', {'form': form})
 
 
-def customer_record(request, pk):
+def view_letter(request, pk):
     if request.user.is_authenticated:
-        customer_record = Record.objects.get(id=pk)
-        return render(request, 'record.html', {'customer_record':customer_record})
+        letter = Letter.objects.get(id=pk)
+        return render(request, 'letter.html', {'letter': letter})
     else:
-        messages.success(request, 'You must be logged in to view a record')
+        messages.success(request, 'You must be logged in to view a letter')
         return redirect('home')
 
 
-def delete_record(request, pk):
+def delete_letter(request, pk):
     if request.user.is_authenticated:
-        deleted_it = Record.objects.get(id=pk)
+        deleted_it = Letter.objects.get(id=pk)
         deleted_it.delete()
-        messages.success(request, 'Record deleted successfully')
+        messages.success(request, 'Letter deleted successfully')
         return redirect('home')
     else:
-        messages.success(request, 'You must be logged in to view a record')
+        messages.success(request, 'You must be logged in to view a letter')
         return redirect('home')
 
 
-def add_record(request):
+def add_letter(request):
     form = AddRecordForm(request.POST or None)
     if request.user.is_authenticated:
         if request.method == 'POST':
             if form.is_valid():
-                add_record = form.save()
-                messages.success(request, 'Record added')
+                letter = form.save(commit=False)
+                letter.user = request.user
+                letter.save()
+                messages.success(request, 'Letter is submitted')
                 return redirect('home')
-        return render(request, 'add_record.html', {'form':form})
+        return render(request, 'add_letter.html', {'form': form})
     else:
-        messages.success(request, 'You must be logged in to add record')
+        messages.success(request, 'You must be logged in to add letter')
         return redirect('home')
 
 
-def update_record(request, pk):
+def update_letter(request, pk):
     if request.user.is_authenticated:
-        current_record = Record.objects.get(id=pk)
-        form = AddRecordForm(request.POST or None, instance=current_record)
+        current_letter = Letter.objects.get(id=pk)
+        form = AddRecordForm(request.POST or None, instance=current_letter)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Record has been updated')
+            messages.success(request, 'Letter has been updated')
             return redirect('home')
-        return render(request, 'update_record.html', {'form':form})
+        return render(request, 'update_letter.html', {'form': form})
     else:
-        messages.success(request, 'You must be logged in to update record')
+        messages.success(request, 'You must be logged in to update letter')
         return redirect('home')
 
 

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+  <div class="card-header">
+      <h5>{{ letter.recipient }}</h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+        <strong>Message: </strong>{{ letter.message }} <br/>
+        <strong>Color: </strong>{{ letter.letter_color }} <br/>
+        <strong>Date: </strong>{{ letter.created_at }} <br/>
+      </p>
+  </div>
+</div>
+
+<br/>
+<a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+<a href="{% url 'delete_letter' letter.id %}" class="btn btn-danger">Delete Letter</a>
+<a href="{% url 'update_letter' letter.id %}" class="btn btn-primary">Update Letter</a>
+
+{% endblock %}
