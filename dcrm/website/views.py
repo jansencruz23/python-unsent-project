@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
 from .models import Letter
+from .utils import colors
 
 
 def home(request):
@@ -83,7 +84,7 @@ def add_letter(request):
                 letter.save()
                 messages.success(request, 'Letter is submitted')
                 return redirect('home')
-        return render(request, 'add_letter.html', {'form': form})
+        return render(request, 'add_letter.html', {'form': form, 'colors': colors.color_mappings.items})
     else:
         messages.success(request, 'You must be logged in to add letter')
         return redirect('home')
