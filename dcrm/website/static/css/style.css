@@ -1,9 +1,48 @@
-.bg-dark {
-    background-color: #303030;
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.bg-black {
+    background-color: #ff0000;
     color: white;
 }
 
 .bg-light {
     background-color: white;
-    color: #303030;
+    color: black;
+}
+
+.abc {
+    margin: 0.15em;
+    font-size: 1.5rem;
+    font-family: "Libre Baskerville";
+}
+
+.recipient {
+    margin-left: 0.25em;
+    font-size: 1.8rem;
+    font-family: 'Roboto';
+}
+
+.bg-transparent {
+    background-color: rgba(0,0,0,0) !important;
+    border: none !important;
+}
+
+.textarea-full {
+    font-size: 2.7rem;
+    width: 100%;
+    height: 100%;
+    margin: 0.3em;
+    padding-right: 0.5em;
+    font-size: 2.9rem;
+    font-family: 'Roboto';
+    line-height: 1.2em;
+}
+
+input:focus, input:focus{
+    outline: none;
+}
+
+textarea:focus, textarea:focus{
+    outline: none;
 }

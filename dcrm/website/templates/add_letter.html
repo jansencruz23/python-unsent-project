@@ -1,13 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
 <h1>Add Letter</h1>
+<div class="col-md-10 col-sm-10 d-flex justify-content-center">
 
     <form method="POST" action="{% url 'add_letter' %}">
         {% csrf_token %}
 
-        {{ form.as_p }}
+        <div class="shadow-sm p-1 d-flex justify-content-center col-lg-9">
+            <div class="bg-dark p-1">
+                <div class="bg-light">
+                    <div class="d-flex align-items-center">
+                        <span class="bg-black abc">ABC</span>
+                        <span class="recipient">To: </span>
+                        <span class="bg-light">
+                            <input type="text" class="recipient col-11 bg-transparent" id="recipient"
+                                   name="recipient" placeholder="Enter Name" required>
+                        </span>
+                        <span class="bg-black p-1">sssss</span>
+                    </div>
+                    <div class="bg-black mx-2" style="height: 24rem;">
+                        <textarea class="textarea-full bg-transparent"  placeholder="Type Your Message Here..."
+                            style="color: white; resize: none;" id="message" name="message" required></textarea>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-2 recipient fw-bold">Send</div>
+                        <div class="col-7 recipient">#unsintproject</div>
+                        <div class="col-2 recipient fw-bold">Back </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="letter_color">Letter Color</label>
+            <input type="text" class="form-control" id="letter_color" name="letter_color" placeholder="Letter Color" required>
+        </div>
 
         <br/>
         <button type="submit" class="btn btn-secondary">Add Letter</button>
