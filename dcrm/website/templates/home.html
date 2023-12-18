@@ -3,34 +3,19 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-
-    <table class="table table-striped table-hover table-bordered">
-        <thead class="table-dark">
-            <tr>
-              <th scope="col">Recipient</th>
-              <th scope="col">Message</th>
-              <th scope="col">Letter Color</th>
-              <th scope="col">Is Visible</th>
-              <th scope="col">Id</th>
-            </tr>
-        </thead>
-        <tbody>
-
-                {% if letters %}
-                    {% for letter in letters %}
-                        <tr>
-                            <td>{{ letter.recipient }}</td>
-                            <td>{{ letter.message }}</td>
-                            <td>{{ letter.letter_color }}</td>
-                            <td>{{ letter.is_visible }}</td>
-                            <td><a href="{% url 'letter' letter.id %}">{{ letter.id }}</a></td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
-
-        </tbody>
-    </table>
-
+    {% if letters %}
+        {% for letter in letters %}
+            {% if forloop.counter0|divisibleby:3 %}
+                <div class="row">
+            {% endif %}
+            <div class="col-lg-4 col-md-6 col-sm-12"> {# Divide row into three columns #}
+                <a href="{% url 'letter' letter.id %}" class="text-decoration-none">{% include '_partial_letter.html' with message=letter %} </a>
+            </div>
+            {% if forloop.counter|divisibleby:3 or forloop.last %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% else %}
 
         <div class="col-md-6 offset-md-3">

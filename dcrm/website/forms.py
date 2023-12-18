@@ -28,6 +28,7 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].label = 'Confirm Password'
         self.fields['password2'].help_text = ''
 
+
 class AddRecordForm(forms.ModelForm):
     recipient = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Recipient', 'class':'form-control'}), label='')
     message = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Message', 'class':'form-control'}), label='')
