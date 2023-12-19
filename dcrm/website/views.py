@@ -3,12 +3,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
-from .models import Letter
+from .models import Letter, User
 from .utils import colors
-from django.db.models import Q
 
 
 def home(request):
+    letters = Letter.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -20,9 +20,9 @@ def home(request):
             return redirect('home')
         else:
             messages.success(request, 'An error occurred. Try again')
-            
-    letters = Letter.objects.filter(Q(is_visible=True) | Q(user_id=request.user.id))
-    return render(request, 'home.html', {'letters': letters})
+            return redirect('home')
+    else:
+        return render(request, 'home.html', {'letters': letters})
 
 
 def login_user(request):
@@ -50,14 +50,15 @@ def register_user(request):
             return redirect('home')
     else:
         form = SignUpForm()
-        return render(request, 'register.html', {'form':form})
+        return render(request, 'register.html', {'form': form})
     return render(request, 'register.html', {'form': form})
 
 
 def view_letter(request, pk):
     if request.user.is_authenticated:
         letter = Letter.objects.get(id=pk)
-        return render(request, 'letter.html', {'letter': letter})
+        username = User.objects.get(id=letter.user_id)
+        return render(request, 'letter.html', {'letter': letter, 'username': username})
     else:
         messages.success(request, 'You must be logged in to view a letter')
         return redirect('home')
@@ -102,5 +103,3 @@ def update_letter(request, pk):
     else:
         messages.success(request, 'You must be logged in to update letter')
         return redirect('home')
-
-
