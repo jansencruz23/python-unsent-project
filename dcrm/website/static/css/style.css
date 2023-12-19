@@ -84,3 +84,17 @@ textarea:focus, textarea:focus{
     padding: 10px;
     resize: none;
 }
+
+.custom-left {
+    margin-right: 20em; /* Adjust the margin to shift the column a few pixels to the left */
+}
+
+@media (max-width: 991.98px) { /* Medium screen and below */
+    .custom-left {
+        margin-right: 0; /* Reset margin for medium and smaller screens */
+    }
+
+    .custom-sm-center {
+        margin: 0 auto; /* Center the column for medium and smaller screens */
+    }
+}

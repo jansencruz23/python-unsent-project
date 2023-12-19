@@ -8,7 +8,7 @@
             {% if forloop.counter0|divisibleby:3 %}
                 <div class="row">
             {% endif %}
-            <div class="col-lg-4 col-md-6 col-sm-12"> {# Divide row into three columns #}
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <a href="{% url 'letter' letter.id %}" class="text-decoration-none">{% include '_partial_letter.html' with message=letter %} </a>
             </div>
             {% if forloop.counter|divisibleby:3 or forloop.last %}
