@@ -1,6 +1,7 @@
 const colorCards = document.querySelectorAll('.color-click');
 const letterColorInput = document.getElementById('letter_color');
 
+
 colorCards.forEach(card => {
     card.addEventListener('click', function() {
         const selectedColor = this.style.backgroundColor;

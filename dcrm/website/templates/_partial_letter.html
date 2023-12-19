@@ -1,21 +1,48 @@
 <div class="shadow-sm p-1">
     <div class="bg-dark p-1">
         <div class="bg-light">
-            <div>
-                <span class="bg-dark">ABC</span>
-                <span class="bg-light"> To: {{ letter.recipient }} </span>
-                <span></span>
+            <div class="d-flex">
+                <span class="bg-default abc">ABC</span>
+                <span class="recipient">To: {{ letter.recipient }}</span>
+                <span class="bg-default px-3 ms-auto m-1">sssss</span>
             </div>
-            <div>
-                {{ letter.message }}
+            <div class="bg-default mx-2 message-color" style="height: 24rem; background-color: {{ letter.letter_color }};
+                padding-right: 1.5em;">
+                <p class="textarea-full bg-transparent py-3 px-2 message-forecolor" style="resize: none; padding-right: 0.65em;
+                    word-wrap: break-word;">
+                    {{ letter.message }}</p>
             </div>
-            <div>
-                <span>Send</span>
-                <span>#unsintproject</span>
-                <span>Back</span>
+            <div class="row text-center">
+                <div class="col-2 recipient fw-bold">Send</div>
+                <div class="col-7 recipient">#unsintproject</div>
+                <div class="col-2 recipient fw-bold" style="margin-left: -0.2em">Back </div>
             </div>
         </div>
     </div>
 </div>
 
 <br/>
+
+<script>
+    window.onload = function() {
+        const messageColors = document.querySelectorAll(".message-color");
+        const messageForecolors = document.querySelectorAll(".message-forecolor");
+
+        messageColors.forEach((messageColor, index) => {
+            const color = messageColor.style.backgroundColor;
+            const textColor = getContrastColor(color);
+            messageForecolors[index].style.color = textColor;
+        });
+    };
+
+    function getContrastColor(rgbColor) {
+        const rgbValues = rgbColor.match(/\d+/g);
+
+        const red = parseInt(rgbValues[0]);
+        const green = parseInt(rgbValues[1]);
+        const blue = parseInt(rgbValues[2]);
+        const brightness = Math.round((red * 299 + green * 587 + blue * 114) / 1000);
+
+        return brightness > 125 ? 'black' : 'white';
+    }
+</script>
