@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-.bg-black {
-    background-color: #ff0000;
+.bg-default {
+    background-color: black;
     color: white;
 }
 
@@ -50,4 +50,37 @@ textarea:focus, textarea:focus{
 .color-card {
     height: 100%;
     width: 100%;
+}
+
+.row-large {
+    display: flex;
+    justify-content: start;
+}
+
+.col-large {
+    display: flex;
+    justify-content: end; /* Align content to the end of the column */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 991px) {
+    /* Adjust styles for small screens */
+    .row-large {
+        justify-content: center; /* Center content horizontally */
+    }
+
+    .col-large {
+        justify-content: center; /* Center content horizontally */
+    }
+}
+
+.col-colors {
+    margin-top: 2em;
+}
+
+#message {
+    color: white; /* Default text color */
+    background-color: black; /* Default background color */
+    padding: 10px;
+    resize: none;
 }

@@ -5,41 +5,40 @@
 <form method="POST" action="{% url 'add_letter' %}">
     {% csrf_token %}
 
-    <div class="row">
-        <div class="col-lg-7 d-flex justify-content-end">
-
-                <div class="shadow-sm p-1 d-flex justify-content-end col-lg-7">
-                    <div class="bg-dark p-1">
-                        <div class="bg-light">
-                            <div class="d-flex align-items-center">
-                                <span class="bg-black abc">ABC</span>
-                                <span class="recipient">To: </span>
-                                <span class="bg-light">
-                                    <input type="text" class="recipient col-11 bg-transparent" id="recipient"
-                                           name="recipient" placeholder="Enter Name" required>
-                                </span>
-                                <span class="bg-black p-1">sssss</span>
-                            </div>
-                            <div class="bg-black mx-2" style="height: 24rem;">
-                                <textarea class="textarea-full bg-transparent"  placeholder="Type Your Message Here..."
-                                    style="color: white; resize: none;" id="message" name="message" required></textarea>
-                            </div>
-                            <div class="row text-center">
-                                <div class="col-2 recipient fw-bold">Send</div>
-                                <div class="col-7 recipient">#unsintproject</div>
-                                <div class="col-2 recipient fw-bold">Back </div>
-                            </div>
+    <div class="row row-large">
+        <div class="col-lg-7 col-large">
+            <div class="shadow-sm p-1 d-flex justify-content-end col-lg-7">
+                <div class="bg-dark p-1">
+                    <div class="bg-light">
+                        <div class="d-flex align-items-center">
+                            <span class="bg-default abc">ABC</span>
+                            <span class="recipient">To: </span>
+                            <span class="bg-light">
+                                <input type="text" class="recipient col-11 bg-transparent" id="recipient"
+                                       name="recipient" placeholder="Enter Name" required>
+                            </span>
+                            <span class="bg-default p-1">sssss</span>
+                        </div>
+                        <div class="bg-default mx-2" style="height: 24rem" id="message-color">
+                            <textarea class="textarea-full bg-transparent"  placeholder="Type Your Message Here..."
+                                style="color: white; resize: none; padding-right: 0.65em;" id="message" name="message" required></textarea>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-2 recipient fw-bold">Send</div>
+                            <div class="col-7 recipient">#unsintproject</div>
+                            <div class="col-2 recipient fw-bold">Back </div>
                         </div>
                     </div>
                 </div>
-
+            </div>
         </div>
-        <div class="col-lg-2 row g-2 p-1">
+        <input type="hidden" id="letter_color" name="letter_color" value="" />
+        <div class="col-lg-2 col-sm-4 row g-2 p-1 col-colors">
             {% for key, color in colors %}
-                <div class="col-3">
-                    <div class="bg-black p-1 color-card " style="width: 3.15em; height: 3.15em;">
-                        <div class="color-card" style="background-color: {{ color }};"
-                            id="letter_color" title="letter_color" data-color="{{ key }}">
+                <div class="col-3 d-flex d-flex justify-content-center">
+                    <div class="bg-default p-1 color-card" style="width: 3.15em; height: 3.15em;">
+                        <div class="color-card color-click" style="background-color: {{ color }};"
+                            title="{{ key }}" data-color="{{ key }}">
                         </div>
                     </div>
                 </div>
