@@ -103,3 +103,13 @@ def update_letter(request, pk):
     else:
         messages.success(request, 'You must be logged in to update letter')
         return redirect('home')
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        user = request.user
+        letters = Letter.objects.filter(user_id=user.id)
+        return render(request, 'profile.html', {'letters': letters, 'user': user})
+    else:
+        messages.success(request, 'You must be logged in to view profile')
+        return redirect('home')
