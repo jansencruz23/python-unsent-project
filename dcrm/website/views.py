@@ -113,3 +113,13 @@ def profile(request):
     else:
         messages.success(request, 'You must be logged in to view profile')
         return redirect('home')
+
+
+def view_user(request, pk):
+    if request.user.is_authenticated:
+        user = User.objects.get(id=pk)
+        letters = Letter.objects.filter(user_id=pk)
+        return render(request, 'view_user.html', {'letters': letters, 'user': user})
+    else:
+        messages.success(request, 'You must be logged in to view profile')
+        return redirect('home')
