@@ -5,10 +5,10 @@ from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
 from .models import Letter
 from .utils import colors
+from django.db.models import Q
 
 
 def home(request):
-    letters = Letter.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -20,9 +20,9 @@ def home(request):
             return redirect('home')
         else:
             messages.success(request, 'An error occurred. Try again')
-            return redirect('home')
-    else:
-        return render(request, 'home.html', {'letters':letters})
+            
+    letters = Letter.objects.filter(Q(is_visible=True) | Q(user_id=request.user.id))
+    return render(request, 'home.html', {'letters': letters})
 
 
 def login_user(request):
