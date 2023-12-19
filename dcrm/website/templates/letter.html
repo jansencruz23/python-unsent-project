@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<br/>
+
 <div class="d-flex justify-content-center">
     <div class="col-lg-4 col-md-6 col-sm-12 custom-left custom-sm-center">
         {% include '_partial_letter.html' with message=letter %}
@@ -20,10 +22,19 @@
         <p class="recipient" style="font-size: 1.2rem; margin-left: -0.1em;">{{ letter.message }}</p>
     </div>
 </div>
-
-
-<a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
-<a href="{% url 'delete_letter' letter.id %}" class="btn btn-danger">Delete Letter</a>
-<a href="{% url 'update_letter' letter.id %}" class="btn btn-primary">Update Letter</a>
+<hr/>
+<div class="d-flex justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-12  custom-left custom-sm-center">
+        {% if current_user.id == letter.user.id %}
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+            <a href="{% url 'update_letter' letter.id %}" class="btn btn-primary">Update Letter</a>
+            <a href="{% url 'delete_letter' letter.id %}" class="btn btn-danger">Delete Letter</a>
+        {% else %}
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+        {% endif %}
+    </div>
+</div>
+<br/>
+<br/>
 
 {% endblock %}

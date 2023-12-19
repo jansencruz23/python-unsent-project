@@ -69,10 +69,11 @@ def view_letter(request, pk):
     if request.user.is_authenticated:
         letter = Letter.objects.get(id=pk)
         username = User.objects.get(id=letter.user_id)
+        current_user = request.user
         if letter.is_visible:
-            return render(request, 'letter.html', {'letter': letter, 'username': username})
+            return render(request, 'letter.html', {'letter': letter, 'username': username, 'current_user': current_user})
         else:
-            return render(request, 'letter.html', {'letter': letter, 'username': 'Anonymous'})
+            return render(request, 'letter.html', {'letter': letter, 'username': 'Anonymous', 'current_user': current_user})
     else:
         messages.success(request, 'You must be logged in to view a letter')
         return redirect('home')
@@ -113,7 +114,7 @@ def update_letter(request, pk):
             form.save()
             messages.success(request, 'Letter has been updated')
             return redirect('home')
-        return render(request, 'update_letter.html', {'form': form})
+        return render(request, 'update_letter.html', {'form': form, 'colors': colors.color_mappings.items})
     else:
         messages.success(request, 'You must be logged in to update letter')
         return redirect('home')
