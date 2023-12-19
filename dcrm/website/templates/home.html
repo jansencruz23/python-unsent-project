@@ -3,6 +3,37 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+    <div>
+        <form method="GET" action="{% url 'home' %}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" style="height: 3em;" name="query" placeholder="Search for a name...">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="width: 7em;"><i class="fa-solid fa-arrow-up-wide-short"></i> Filter</button>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-style">
+                    <div class="mb-3">
+                        <label class="form-label dropdown-title fw-bold">Archive Filters</label><br>
+                        <label class="form-label dropdown-subtitle fw-bold">Search By</label><br>
+                        <div class="form-check dropdown-label">
+                            <input class="form-check-input" type="radio" name="category" value="recipient" checked
+                                onclick="keepDropdownOpen()">Recipient
+                        </div>
+                        <div class="form-check dropdown-label">
+                            <input class="form-check-input" type="radio" name="category" value="message"
+                                onclick="keepDropdownOpen()">
+                                Message Content
+                        </div>
+                        <div class="form-check dropdown-label">
+                            <input class="form-check-input" type="radio" name="category" value="profile"
+                                onclick="keepDropdownOpen()">
+                                Profile
+                        </div>
+                    </div>
+                    <hr/>
+                    <button type="submit" class="btn btn-dark col-11 dropdown-button">Update Filters</button>
+                </ul>
+            </div>
+        </form>
+    </div>
     {% if letters %}
         {% for letter in letters %}
             {% if forloop.counter0|divisibleby:3 %}
@@ -42,4 +73,16 @@
 
     {% endif %}
 
+<script>
+    function keepDropdownOpen() {
+        var dropdownElement = document.getElementById('dropdown-container');
+        var isDropdownOpen = new bootstrap.Dropdown(dropdownElement)._menu.classList.contains('show');
+
+        if (isDropdownOpen) {
+            new bootstrap.Dropdown(dropdownElement).toggle();
+        }
+    }
+</script>
+
     {% endblock %}
+

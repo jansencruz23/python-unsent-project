@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Letter(models.Model):
+    objects = None
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipient = models.CharField(max_length=12)

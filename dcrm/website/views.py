@@ -8,7 +8,18 @@ from .utils import colors
 
 
 def home(request):
-    letters = Letter.objects.all()
+    category = request.GET.get('category')
+    query = request.GET.get('query')
+
+    if category == 'recipient':
+        letters = Letter.objects.filter(recipient__icontains=query)
+    elif category == 'message':
+        letters = Letter.objects.filter(message__icontains=query)
+    elif category == 'profile':
+        letters = Letter.objects.filter(profile__icontains=query)
+    else:
+        letters = Letter.objects.all()
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -58,7 +69,10 @@ def view_letter(request, pk):
     if request.user.is_authenticated:
         letter = Letter.objects.get(id=pk)
         username = User.objects.get(id=letter.user_id)
-        return render(request, 'letter.html', {'letter': letter, 'username': username})
+        if letter.is_visible:
+            return render(request, 'letter.html', {'letter': letter, 'username': username})
+        else:
+            return render(request, 'letter.html', {'letter': letter, 'username': 'Anonymous'})
     else:
         messages.success(request, 'You must be logged in to view a letter')
         return redirect('home')
@@ -118,7 +132,7 @@ def profile(request):
 def view_user(request, pk):
     if request.user.is_authenticated:
         user = User.objects.get(id=pk)
-        letters = Letter.objects.filter(user_id=pk)
+        letters = Letter.objects.filter(user_id=pk, is_visible=True)
         return render(request, 'view_user.html', {'letters': letters, 'user': user})
     else:
         messages.success(request, 'You must be logged in to view profile')

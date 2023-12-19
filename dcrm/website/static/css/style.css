@@ -59,18 +59,16 @@ textarea:focus, textarea:focus{
 
 .col-large {
     display: flex;
-    justify-content: end; /* Align content to the end of the column */
+    justify-content: end;
 }
 
-/* Media query for smaller screens */
 @media (max-width: 991px) {
-    /* Adjust styles for small screens */
     .row-large {
-        justify-content: center; /* Center content horizontally */
+        justify-content: center;
     }
 
     .col-large {
-        justify-content: center; /* Center content horizontally */
+        justify-content: center;
     }
 }
 
@@ -79,22 +77,55 @@ textarea:focus, textarea:focus{
 }
 
 #message {
-    color: white; /* Default text color */
-    background-color: black; /* Default background color */
+    color: white;
+    background-color: black;
     padding: 10px;
     resize: none;
 }
 
 .custom-left {
-    margin-right: 20em; /* Adjust the margin to shift the column a few pixels to the left */
+    margin-right: 20em;
 }
 
-@media (max-width: 991.98px) { /* Medium screen and below */
+@media (max-width: 991.98px) {
     .custom-left {
-        margin-right: 0; /* Reset margin for medium and smaller screens */
+        margin-right: 0;
     }
 
     .custom-sm-center {
-        margin: 0 auto; /* Center the column for medium and smaller screens */
+        margin: 0 auto;
     }
+}
+
+.dropdown-style {
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+
+}
+
+.dropdown-title {
+    margin: 0.7em;
+    padding-left: 0.7em;
+    font-size: 1.1rem;
+}
+
+.dropdown-subtitle {
+    margin: 0.7em;
+    padding-left: 0.7em;
+    font-size: 1rem;
+}
+
+.dropdown-label {
+    margin: 0.5em 0em 0em 1.5em;
+    padding-left: 3em;
+    font-size: 0.9rem;
+}
+
+.dropdown-button {
+    height: 3em;
+    margin: -0.3em 0 0.3em 0.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

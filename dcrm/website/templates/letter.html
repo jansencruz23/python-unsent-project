@@ -10,8 +10,13 @@
 <div class="d-flex justify-content-center">
     <div class="col-lg-4 col-md-6 col-sm-12  custom-left custom-sm-center">
         <h5 class="fw-bold" style="font-size: 1.5rem;">{{ letter.recipient }}</h5>
-        <p>Posted on {{ letter.created_at|date:"m/d/Y" }} by <a href="{%url 'view_user' letter.user_id %}"
-            class="fw-bold text-decoration-none" style="color: black;">{{ username }} </a></p>
+        <p>Posted on {{ letter.created_at|date:"m/d/Y" }} by
+            {% if username == 'Anonymous' %}
+                <a href="#" class="fw-bold text-decoration-none" style="color: black;">{{ username }}</a>
+            {% else %}
+                <a href="{%url 'view_user' letter.user_id %}"
+                    class="fw-bold text-decoration-none" style="color: black;">{{ username }} </a>
+            {% endif %}
         <p class="recipient" style="font-size: 1.2rem; margin-left: -0.1em;">{{ letter.message }}</p>
     </div>
 </div>
