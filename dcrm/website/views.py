@@ -16,7 +16,7 @@ def home(request):
     elif category == 'message':
         letters = Letter.objects.filter(message__icontains=query)
     elif category == 'profile':
-        letters = Letter.objects.filter(profile__icontains=query)
+        letters = Letter.objects.filter(user__username__icontains=query, is_visible=True)
     else:
         letters = Letter.objects.all()
 
