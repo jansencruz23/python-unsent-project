@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm
+from .forms import SignUpForm, AddLetterForm
 from .models import Letter, User
 from .utils import colors
 from django.core.paginator import Paginator
@@ -99,7 +99,7 @@ def delete_letter(request, pk):
 
 
 def add_letter(request):
-    form = AddRecordForm(request.POST or None)
+    form = AddLetterForm(request.POST or None)
     if request.user.is_authenticated:
         if request.method == 'POST':
             if form.is_valid():
@@ -117,7 +117,7 @@ def add_letter(request):
 def update_letter(request, pk):
     if request.user.is_authenticated:
         current_letter = Letter.objects.get(id=pk)
-        form = AddRecordForm(request.POST or None, instance=current_letter)
+        form = AddLetterForm(request.POST or None, instance=current_letter)
         if form.is_valid():
             form.save()
             messages.success(request, 'Letter has been updated')

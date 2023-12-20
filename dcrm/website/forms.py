@@ -29,7 +29,7 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].help_text = ''
 
 
-class AddRecordForm(forms.ModelForm):
+class AddLetterForm(forms.ModelForm):
     recipient = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Recipient', 'class':'form-control'}), label='')
     message = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Message', 'class':'form-control'}), label='')
     letter_color = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Letter Color', 'class':'form-control'}), label='')
