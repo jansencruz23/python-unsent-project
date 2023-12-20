@@ -15,8 +15,9 @@
           <li class="nav-item">
             <a class="nav-link nav-style" href="{% url 'profile' %}">PROFILE</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link nav-style" href="{% url 'logout' %}">LOGOUT</a>
+          <li class="nav-item" >
+              <a class="nav-link nav-style" style="cursor: pointer;" data-bs-toggle="modal"
+                 data-bs-target="#staticBackdropLogout">LOG OUT</a>
           </li>
         </ul>
           <a class="btn btn-dark nav-style py-2 px-3 nav-btn" href="{% url 'add_letter' %}">SUBMIT</a>
@@ -33,3 +34,21 @@
     </div>
   </div>
 </nav>
+
+<div class="modal fade" id="staticBackdropLogout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Log out</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure to log out?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
+      </div>
+    </div>
+  </div>
+</div>

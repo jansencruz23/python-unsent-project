@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm
 from .models import Letter, User
 from .utils import colors
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -21,6 +22,11 @@ def home(request):
     else:
         letters = Letter.objects.all()
 
+    paginator = Paginator(letters, 1)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -34,7 +40,7 @@ def home(request):
             messages.success(request, 'An error occurred. Try again')
             return redirect('home')
     else:
-        return render(request, 'home.html', {'letters': letters, 'count': count})
+        return render(request, 'home.html', {'letters': page_obj, 'count': count})
 
 
 def login_user(request):

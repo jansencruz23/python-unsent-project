@@ -8,7 +8,7 @@
     </div>
     <h5 class="d-flex justify-content-center subtitle">A Collection Of Unsent Text Messages To First Loves</h5>
     <p class="d-flex justify-content-center fs-5 count-desc">{{ count }} Letters Found</p>
-    <div>
+    <div class="mb-5">
         <form method="GET" action="{% url 'home' %}">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" style="height: 3em;" name="query" placeholder="Search for a name...">
@@ -52,6 +52,22 @@
             {% endif %}
         {% endfor %}
     {% endif %}
+
+    <div class="pagination mb-5 mt-5">
+        {% if letters.has_previous %}
+            <a href="?page=1" class="btn btn-secondary m-1">&laquo; First</a>
+            <a href="?page={{ letters.previous_page_number }}" class="btn btn-secondary m-1">Previous</a>
+        {% endif %}
+
+        <span class="btn btn-dark m-1">
+            Page {{ letters.number }} of {{ letters.paginator.num_pages }}.
+        </span>
+
+        {% if letters.has_next %}
+            <a href="?page={{ letters.next_page_number }}" class="btn btn-secondary m-1">Next</a>
+            <a href="?page={{ letters.paginator.num_pages }}" class="btn btn-secondary m-1">Last &raquo;</a>
+        {% endif %}
+    </div>
 
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script>
@@ -100,5 +116,5 @@
     }
 </script>
 
-    {% endblock %}
+{% endblock %}
 
