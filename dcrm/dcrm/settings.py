@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-8dvudpyxe#t9)+&02pph4^va$px*xz_a#=3c20+aaab=3ac%04
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -75,14 +75,29 @@ WSGI_APPLICATION = 'dcrm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'db_unsentproj',
+#        'USER': 'root',
+#        'PASSWORD': '',
+#        'HOST': 'localhost',
+#        'PORT': '3306',
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_unsentproj',
+        'NAME': 'railway',
         'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'PASSWORD': 'f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb',
+        'HOST': 'viaduct.proxy.rlwy.net',
+        'PORT': '46626',
+        'MYSQL_DATABASE': 'railway',
+        'MYSQL_PRIVATE_URL': 'mysql://root:f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb@mysql.railway.internal:3306/railway',
+        'MYSQL_ROOT_PASSWORD': 'f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb',
+        'MYSQL_URL': 'mysql://root:f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb@viaduct.proxy.rlwy.net:46626/railway',
     }
 }
 
@@ -125,6 +140,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'website', 'static'),
 )
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
