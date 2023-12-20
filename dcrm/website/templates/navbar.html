@@ -23,10 +23,10 @@
           <a class="btn btn-dark nav-style py-2 px-3 nav-btn" href="{% url 'add_letter' %}">SUBMIT</a>
         {% else %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Register</a>
+            <a class="nav-link nav-style" href="{% url 'home' %}">LOGIN</a>
           </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'home' %}">Login</a>
+          <li class="nav-item">
+            <a class="nav-link nav-style" href="{% url 'register' %}">REGISTER</a>
           </li>
         {% endif %}
 

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 <p class="d-flex justify-content-center fs-2 mt-5">Update a Letter</p>
 <form method="POST">
@@ -18,7 +19,7 @@
                                        name="recipient" placeholder="Enter Name" required maxlength="12"
                                         value="{{ form.recipient.value }}">
                             </span>
-                            <span class="bg-default px-3 py-1 ms-auto mx-1">sssss</span>
+                            <span class="bg-default px-3 ms-auto m-1"><img src="{% static 'mail.png' %}" width="50px" height="25px"></span>
                         </div>
                         <div class="bg-default mx-2 message-color" style="height: 24rem;
                             background-color: {{ form.letter_color.value }}" id="message-color">

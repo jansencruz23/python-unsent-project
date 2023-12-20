@@ -1,14 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
-<h1>Register</h1>
-<br/>
-
-<form method="POST" action="">
-    {% csrf_token %}
-
-    {% if form.errors %}
+{% if form.errors %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             Your form has errors
             {% for field in form %}
@@ -20,10 +13,70 @@
         </div>
     {% endif %}
 
-    {{ form.as_p }}
 
-    <button type="submit" class="btn btn-secondary">Register</button>
-</form>
-</div>
+<section class="text-center text-lg-start">
+  <style>
+    .cascading-left {
+      margin-left: 50px;
+    }
 
+    @media (max-width: 991.98px) {
+      .cascading-left {
+        margin-left: 0;
+      }
+
+      .welcome-letter {
+        display: flex !important;
+        justify-content: center !important;
+      }
+    }
+  </style>
+
+  <!-- Jumbotron -->
+  <div class="container py-4">
+    <div class="row g-0 align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0 d-flex justify-content-end welcome-letter">
+        <img src="https://i.imgur.com/mCB9ZKG.png" class="w-75 rounded-4 shadow-4"
+          alt="" />
+      </div>
+      <div class="col-lg-5 mb-5 mb-lg-0">
+        <div class="card cascading-left shadow-sm" style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+            ">
+          <div class="card-body p-5 shadow-5 text-center">
+            <h2 class="fw-5 mb-5">Register account</h2>
+            <form method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <label class="form-label d-flex justify-content-start" for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control" />
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <label class="form-label d-flex justify-content-start" for="password1">Password</label>
+                <input type="password" name="password1" id="password1" class="form-control" />
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-5">
+                <label class="form-label d-flex justify-content-start" for="password2">Confirm Password</label>
+                <input type="password" name="password2" id="password2" class="form-control" />
+              </div>
+
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block mb-4 col-6">
+                Sign up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
 {% endblock %}

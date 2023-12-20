@@ -22,7 +22,7 @@ def home(request):
     else:
         letters = Letter.objects.all()
 
-    paginator = Paginator(letters, 1)
+    paginator = Paginator(letters, 30)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -77,6 +77,7 @@ def view_letter(request, pk):
         letter = Letter.objects.get(id=pk)
         username = User.objects.get(id=letter.user_id)
         current_user = request.user
+
         if letter.is_visible:
             return render(request, 'letter.html', {'letter': letter, 'username': username, 'current_user': current_user})
         else:
@@ -131,7 +132,12 @@ def profile(request):
     if request.user.is_authenticated:
         user = request.user
         letters = Letter.objects.filter(user_id=user.id)
-        return render(request, 'profile.html', {'letters': letters, 'user': user})
+
+        paginator = Paginator(letters, 30)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, 'profile.html', {'letters': page_obj, 'user': user})
     else:
         messages.success(request, 'You must be logged in to view profile')
         return redirect('home')
@@ -141,7 +147,12 @@ def view_user(request, pk):
     if request.user.is_authenticated:
         user = User.objects.get(id=pk)
         letters = Letter.objects.filter(user_id=pk, is_visible=True)
-        return render(request, 'view_user.html', {'letters': letters, 'user': user})
+
+        paginator = Paginator(letters, 30)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, 'view_user.html', {'letters': page_obj, 'user': user})
     else:
         messages.success(request, 'You must be logged in to view profile')
         return redirect('home')
