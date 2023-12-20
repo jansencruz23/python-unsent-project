@@ -87,18 +87,42 @@ WSGI_APPLICATION = 'dcrm.wsgi.application'
 #    }
 #}
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'railway',
+#        'USER': 'root',
+#        'PASSWORD': 'f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb',
+#        'HOST': 'viaduct.proxy.rlwy.net',
+#        'PORT': '46626',
+#        'MYSQL_DATABASE': 'railway',
+#        'MYSQL_PRIVATE_URL': 'mysql://root:f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb@mysql.railway.internal:3306/railway',
+#        'MYSQL_ROOT_PASSWORD': 'f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb',
+#        'MYSQL_URL': 'mysql://root:f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb@viaduct.proxy.rlwy.net:46626/railway',
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '46626',
-        'MYSQL_DATABASE': 'railway',
-        'MYSQL_PRIVATE_URL': 'mysql://root:f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb@mysql.railway.internal:3306/railway',
+        'USER': 'postgres',
+        'PASSWORD': 'Bde25BCg62D2aaEdEeGFeCe6*G3E*1Fd',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '28941',
+        'POSTGRES_DB': 'railway',
+        'POSTGRES_PASSWORD': 'Bde25BCg62D2aaEdEeGFeCe6*G3E*1Fd',
+        'POSTGRES_USER': 'postgres',
+        'SSL_CERT_DAYS': '820',
+        'DATABASE_PRIVATE_URL': 'postgresql://postgres:Bde25BCg62D2aaEdEeGFeCe6*G3E*1Fd@postgres.railway.internal:5432/railway',
         'MYSQL_ROOT_PASSWORD': 'f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb',
-        'MYSQL_URL': 'mysql://root:f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb@viaduct.proxy.rlwy.net:46626/railway',
+        'DATABASE_URL': 'postgresql://postgres:Bde25BCg62D2aaEdEeGFeCe6*G3E*1Fd@roundhouse.proxy.rlwy.net:28941/railway',
+        'PGDATA': '/var/lib/postgresql/data/pgdata',
+        'PGDATABASE': 'railway',
+        'PGHOST': 'roundhouse.proxy.rlwy.net',
+        'PGPASSWORD': 'Bde25BCg62D2aaEdEeGFeCe6*G3E*1Fd',
+        'PGPORT': '28941',
+        'PGUSER': 'postgres'
     }
 }
 
