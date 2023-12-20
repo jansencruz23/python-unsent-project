@@ -10,6 +10,7 @@ from .utils import colors
 def home(request):
     category = request.GET.get('category')
     query = request.GET.get('query')
+    count = Letter.objects.count()
 
     if category == 'recipient':
         letters = Letter.objects.filter(recipient__icontains=query)
@@ -33,7 +34,7 @@ def home(request):
             messages.success(request, 'An error occurred. Try again')
             return redirect('home')
     else:
-        return render(request, 'home.html', {'letters': letters})
+        return render(request, 'home.html', {'letters': letters, 'count': count})
 
 
 def login_user(request):

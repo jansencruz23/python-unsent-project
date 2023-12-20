@@ -11,6 +11,41 @@
     color: black;
 }
 
+.nav-style {
+    font-size: 0.95rem !important;
+    font-family: 'Roboto' !important;
+    font-weight: bold !important;
+    color: '#303030' !important;
+    margin: 0em 1em 0em 1em !important;
+}
+
+.subtitle {
+    font-size: 2rem;
+    font-family: 'Roboto';
+}
+
+.count-desc {
+    margin-top: 1em;
+    margin-bottom: 4em;
+}
+
+.nav-btn {
+    font-family: 'Roboto' !important;
+    font-weight: bold;
+}
+
+.title {
+  font-size: 4.5rem;
+  height: 180px;
+}
+
+.typed-cursor {
+    font-size: 4.5rem;
+    margin-top: -20px;
+    margin-left: -55px;
+    font-weight: 100;
+}
+
 .abc {
     margin: 0.15em;
     font-size: 1.5rem;

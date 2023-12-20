@@ -3,6 +3,11 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+    <div class="d-flex align-items-center justify-content-center mt-5 mb-5">
+        <h1 class="title p-5" id="title"></h1>
+    </div>
+    <h5 class="d-flex justify-content-center subtitle">A Collection Of Unsent Text Messages To First Loves</h5>
+    <p class="d-flex justify-content-center fs-5 count-desc">{{ count }} Letters Found</p>
     <div>
         <form method="GET" action="{% url 'home' %}">
             <div class="input-group mb-3">
@@ -47,6 +52,17 @@
             {% endif %}
         {% endfor %}
     {% endif %}
+
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#title', {
+            strings: ['THE UNSINT PROJECT', ' '],
+            typeSpeed: 80,
+            backSpeed: 80,
+            loop: true,
+        });
+    </script>
+
 {% else %}
 
         <div class="col-md-6 offset-md-3">
