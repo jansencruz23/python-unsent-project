@@ -156,3 +156,7 @@ def view_user(request, pk):
     else:
         messages.success(request, 'You must be logged in to view profile')
         return redirect('home')
+
+
+def about(request):
+    return render(request, 'about.html', {})
