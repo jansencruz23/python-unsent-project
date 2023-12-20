@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'dcrm.wsgi.application'
 #        'MYSQL_ROOT_PASSWORD': 'f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb',
 #        'MYSQL_URL': 'mysql://root:f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb@viaduct.proxy.rlwy.net:46626/railway',
 #    }
-#}
+##}
 
 DATABASES = {
     'default': {
