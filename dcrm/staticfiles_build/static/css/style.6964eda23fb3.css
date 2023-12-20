@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.bg-default {
+    background-color: black;
+    color: white;
+}
+
+.bg-light {
+    background-color: white;
+    color: black;
+}
+
+.nav-style {
+    font-size: 0.95rem !important;
+    font-family: 'Roboto' !important;
+    font-weight: bold !important;
+    color: '#303030' !important;
+    margin: 0em 1em 0em 1em !important;
+}
+
+.subtitle {
+    font-size: 2rem;
+    font-family: 'Roboto';
+}
+
+.count-desc {
+    margin-top: 1em;
+    margin-bottom: 4em;
+}
+
+.nav-btn {
+    font-family: 'Roboto' !important;
+    font-weight: bold;
+}
+
+.title {
+  font-size: 4.5rem;
+  height: 180px;
+}
+
+.typed-cursor {
+    font-size: 4.5rem;
+    margin-top: -20px;
+    margin-left: -55px;
+    font-weight: 100;
+}
+
+.abc {
+    margin: 0.15em;
+    font-size: 1.5rem;
+    font-family: "Libre Baskerville";
+}
+
+.recipient {
+    margin-left: 0.25em;
+    font-size: 1.8rem;
+    font-family: 'Roboto';
+}
+
+.bg-transparent {
+    background-color: rgba(0,0,0,0) !important;
+    border: none !important;
+}
+
+.textarea-full {
+    font-size: 2.7rem;
+    width: 100%;
+    height: 100%;
+    margin: 0.3em;
+    padding-right: 0.5em;
+    font-size: 2.9rem;
+    font-family: 'Roboto';
+    line-height: 1.2em;
+}
+
+input:focus, input:focus{
+    outline: none;
+}
+
+textarea:focus, textarea:focus{
+    outline: none;
+}
+
+.color-card {
+    height: 100%;
+    width: 100%;
+}
+
+.row-large {
+    display: flex;
+    justify-content: start;
+}
+
+.col-large {
+    display: flex;
+    justify-content: end;
+}
+
+@media (max-width: 991px) {
+    .row-large {
+        justify-content: center;
+    }
+
+    .col-large {
+        justify-content: center;
+    }
+}
+
+.col-colors {
+    margin-top: 2em;
+}
+
+#message {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    resize: none;
+}
+
+.custom-left {
+    margin-right: 20em;
+}
+
+@media (max-width: 991.98px) {
+    .custom-left {
+        margin-right: 0;
+    }
+
+    .custom-sm-center {
+        margin: 0 auto;
+    }
+}
+
+.dropdown-style {
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdown-title {
+    margin: 0.7em;
+    padding-left: 0.7em;
+    font-size: 1.1rem;
+}
+
+.dropdown-subtitle {
+    margin: 0.7em;
+    padding-left: 0.7em;
+    font-size: 1rem;
+}
+
+.dropdown-label {
+    margin: 0.5em 0em 0em 1.5em;
+    padding-left: 3em;
+    font-size: 0.9rem;
+}
+
+.dropdown-button {
+    height: 3em;
+    margin: -0.3em 0 0.3em 0.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-submit {
+    font-family: 'Roboto';
+    font-weight: 900;
+}
