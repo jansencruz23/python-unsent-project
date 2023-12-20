@@ -1,39 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}" style="color:black">The Unsint Project</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" style="color:black" href="{% url 'home' %}">Archive</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color:black" href="{% url 'profile' %}">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color:black" href="{% url 'logout' %}">Logout</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                {% if user.is_authenticated %}
-                <li class="nav-item btn btn-dark p-1" style="height: 3em;">
-                    <a class="nav-link btn-submit" style="color:white" href="{% url 'add_letter' %}">SUBMIT</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" style="color:black" href="{% url 'register' %}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color:black" href="{% url 'home' %}">Login</a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container-fluid mt-4">
+    <a class="navbar-brand position-absolute mt-4 top-0 start-1" href="{% url 'home' %}">
+      <img src="{% static 'Logo.png' %}" style="margin-left: 15px; margin-top: -10px;" width="50px" height="50px"></a>
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto d-flex justify-content-between">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link nav-style" href="{% url 'home' %}">ARCHIVE</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-style" href="{% url 'profile' %}">PROFILE</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-style" href="{% url 'logout' %}">LOGOUT</a>
+          </li>
+        </ul>
+          <a class="btn btn-dark nav-style py-2 px-3 nav-btn" href="{% url 'add_letter' %}">SUBMIT</a>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Login</a>
+          </li>
+        {% endif %}
+
+      </ul>
     </div>
+  </div>
 </nav>

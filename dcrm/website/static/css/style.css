@@ -11,6 +11,19 @@
     color: black;
 }
 
+.nav-style {
+    font-size: 0.95rem !important;
+    font-family: 'Roboto' !important;
+    font-weight: bold !important;
+    color: '#303030' !important;
+    margin: 0em 1em 0em 1em !important;
+}
+
+.nav-btn {
+    font-family: 'Roboto' !important;
+    font-weight: bold;
+}
+
 .abc {
     margin: 0.15em;
     font-size: 1.5rem;
