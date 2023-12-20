@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -100,7 +101,6 @@ DATABASES = {
         'MYSQL_URL': 'mysql://root:f1gaC5dee6dA4EC3CC-6eBdBCd-ggfBb@viaduct.proxy.rlwy.net:46626/railway',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
