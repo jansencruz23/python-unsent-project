@@ -101,7 +101,6 @@ textarea:focus, textarea:focus{
     width: 300px;
     max-height: 300px;
     overflow-y: auto;
-
 }
 
 .dropdown-title {
@@ -128,4 +127,9 @@ textarea:focus, textarea:focus{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.btn-submit {
+    font-family: 'Roboto';
+    font-weight: 900;
 }
