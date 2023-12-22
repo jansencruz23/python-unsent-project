@@ -11,7 +11,6 @@ from django.core.paginator import Paginator
 def home(request):
     category = request.GET.get('category')
     query = request.GET.get('query')
-    count = Letter.objects.count()
 
     if category == 'recipient':
         letters = Letter.objects.filter(recipient__icontains=query)
@@ -22,8 +21,9 @@ def home(request):
     else:
         letters = Letter.objects.all()
 
-    paginator = Paginator(letters, 30)
+    count = letters.count()
 
+    paginator = Paginator(letters, 30)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
