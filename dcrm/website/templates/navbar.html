@@ -26,7 +26,12 @@
                  data-bs-target="#staticBackdropLogout">LOG OUT</a>
           </li>
         </ul>
-          <a class="btn btn-dark nav-style py-2 px-3 nav-btn" href="{% url 'add_letter' %}">SUBMIT</a>
+          <button class="btn {% if notifications %}btn-dark{% else %}btn-white{% endif %} nav-notif py-2 px-3"
+                  type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+              <i class="fa-solid fa-bell"></i>
+          </button>
+            <a class="btn btn-dark nav-style py-2 px-3 nav-btn" href="{% url 'add_letter' %}">SUBMIT</a>
+
         {% else %}
           <li class="nav-item">
             <a class="nav-link nav-style" href="{% url 'home' %}">ARCHIVE</a>
@@ -62,5 +67,28 @@
         <a href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    {% if notifications %}
+        {% for notification in notifications %}
+           <div class="card">
+              <h5 class="card-header">Letter Notification</h5>
+              <div class="card-body">
+                <h5 class="card-title">{{ notification.letter.message }}</h5>
+                <p class="card-text"></p>
+                <a href="{% url 'letter_notif' notification.letter.id %}" class="btn btn-primary">View Letter</a>
+              </div>
+           </div>
+        {% endfor %}
+    {% else %}
+        </div>
+    {% endif %}
   </div>
 </div>

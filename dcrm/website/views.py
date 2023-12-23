@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SignUpForm, AddLetterForm
-from .models import Letter, User
-from .utils import colors
+from .models import Letter, User, Notification
+from .templatetags import colors
 from django.core.paginator import Paginator
 
 
@@ -21,13 +21,19 @@ def home(request):
     else:
         letters = Letter.objects.all()
 
+    current_user = request.user
+    notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+
     count = letters.count()
 
     paginator = Paginator(letters, 30)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'home.html', {'letters': page_obj, 'count': count})
+    return render(request, 'home.html', {
+        'letters': page_obj,
+        'count': count,
+        'notifications': notifications})
 
 
 def login_user(request):
@@ -77,11 +83,48 @@ def view_letter(request, pk):
         letter = Letter.objects.get(id=pk)
         username = User.objects.get(id=letter.user_id)
         current_user = request.user
+        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
 
         if letter.is_visible:
-            return render(request, 'letter.html', {'letter': letter, 'username': username, 'current_user': current_user})
+            return render(request, 'letter.html', {
+                'letter': letter,
+                'username': username,
+                'current_user': current_user,
+                'notifications': notifications})
         else:
-            return render(request, 'letter.html', {'letter': letter, 'username': 'Anonymous', 'current_user': current_user})
+            return render(request, 'letter.html', {
+                'letter': letter,
+                'username': 'Anonymous',
+                'current_user': current_user,
+                'notifications': notifications})
+    else:
+        messages.success(request, 'You must be logged in to view a letter')
+        return redirect('home')
+
+
+def letter_notif(request, pk):
+    if request.user.is_authenticated:
+        letter = Letter.objects.get(id=pk)
+        username = User.objects.get(id=letter.user_id)
+        current_user = request.user
+
+        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+        notification = Notification.objects.get(letter__id=pk)
+        notification.is_read = True
+        notification.save()
+
+        if letter.is_visible:
+            return render(request, 'letter.html', {
+                'letter': letter,
+                'username': username,
+                'current_user': current_user,
+                'notifications': notifications})
+        else:
+            return render(request, 'letter.html', {
+                'letter': letter,
+                'username': 'Anonymous',
+                'current_user': current_user,
+                'notifications': notifications})
     else:
         messages.success(request, 'You must be logged in to view a letter')
         return redirect('home')
@@ -107,10 +150,18 @@ def add_letter(request):
                 letter.user = request.user
                 letter.save()
                 messages.success(request, 'Letter is submitted')
+
+                Notification.objects.create(
+                    letter=letter,
+                    is_read=False
+                )
+
                 return redirect('home')
-        return render(request, 'add_letter.html', {'form': form, 'colors': colors.color_mappings.items})
+        return render(request, 'add_letter.html', {
+            'form': form,
+            'colors': colors.color_mappings.items})
     else:
-        messages.success(request, 'You must be logged in to add letter')
+        messages.error(request, 'You must be logged in to add letter')
         return redirect('login_user')
 
 
@@ -121,8 +172,15 @@ def update_letter(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Letter has been updated')
+
+            notification = Notification.objects.get(letter__id=pk)
+            notification.is_read = False
+            notification.save()
+
             return redirect('home')
-        return render(request, 'update_letter.html', {'form': form, 'colors': colors.color_mappings.items})
+        return render(request, 'update_letter.html', {
+            'form': form,
+            'colors': colors.color_mappings.items})
     else:
         messages.success(request, 'You must be logged in to update letter')
         return redirect('home')
@@ -134,11 +192,18 @@ def profile(request):
         letters = Letter.objects.filter(user_id=user.id)
         count = letters.count()
 
+        current_user = request.user
+        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+
         paginator = Paginator(letters, 30)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        return render(request, 'profile.html', {'letters': page_obj, 'user': user, 'count': count})
+        return render(request, 'profile.html', {
+            'letters': page_obj,
+            'user': user,
+            'count': count,
+            'notifications': notifications})
     else:
         messages.success(request, 'You must be logged in to view profile')
         return redirect('home')
@@ -150,11 +215,18 @@ def view_user(request, pk):
         letters = Letter.objects.filter(user_id=pk, is_visible=True)
         count = letters.count()
 
+        current_user = request.user
+        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+
         paginator = Paginator(letters, 30)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        return render(request, 'view_user.html', {'letters': page_obj, 'user': user, 'count': count})
+        return render(request, 'view_user.html', {
+            'letters': page_obj,
+            'user': user,
+            'count': count,
+            'notifications': notifications})
     else:
         messages.success(request, 'You must be logged in to view profile')
         return redirect('home')
@@ -167,14 +239,21 @@ def about(request):
 def mailbox(request):
     if request.user.is_authenticated:
         user = request.user
-        letters = Letter.objects.filter(recipient__icontains=user.username)
+        letters = Letter.objects.filter(recipient=user.username)
         count = letters.count()
+
+        current_user = request.user
+        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
 
         paginator = Paginator(letters, 30)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        return render(request, 'mailbox.html', {'letters': page_obj, 'user': user, 'count': count})
+        return render(request, 'mailbox.html', {
+            'letters': page_obj,
+            'user': user,
+            'count': count,
+            'notifications': notifications})
     else:
         messages.success(request, 'You must be logged in to view your mailbox')
         return redirect('login_user')

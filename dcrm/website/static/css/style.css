@@ -128,12 +128,12 @@ textarea:focus, textarea:focus{
 
 @media (max-width: 991.98px) {
     .title {
-        font-size: 2.5rem !important;
+        font-size: 2.3rem !important;
         height: 80px !important;
     }
 
     .typed-cursor {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
         margin-top: 32px;
         font-weight: 100;
     }
@@ -148,6 +148,22 @@ textarea:focus, textarea:focus{
 
     .nav-center {
         margin-left: 0em !important;
+    }
+
+    .nav-notif {
+        margin: 0em 1em 0em 1em !important;
+    }
+
+    .subtitle {
+        font-size: 1.5rem !important;
+        font-family: 'Roboto';
+    }
+}
+
+@media (max-width: 576px) {
+    .subtitle {
+        font-size: 1rem !important;
+        font-family: 'Roboto';
     }
 }
 

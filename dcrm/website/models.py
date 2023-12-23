@@ -13,3 +13,9 @@ class Letter(models.Model):
 
     def __str__(self):
         return f'{self.recipient} - {self.message}'
+
+
+class Notification(models.Model):
+    objects = None
+    letter = models.ForeignKey(Letter, on_delete=models.CASCADE)
+    is_read = models.BooleanField(default=False)
