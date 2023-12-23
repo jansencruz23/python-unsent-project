@@ -122,6 +122,10 @@ textarea:focus, textarea:focus{
     margin-right: 20em;
 }
 
+.nav-center {
+    margin-left: 7em !important;
+}
+
 @media (max-width: 991.98px) {
     .title {
         font-size: 2.5rem !important;
@@ -140,6 +144,10 @@ textarea:focus, textarea:focus{
 
     .custom-sm-center {
         margin: 0 auto;
+    }
+
+    .nav-center {
+        margin-left: 0em !important;
     }
 }
 

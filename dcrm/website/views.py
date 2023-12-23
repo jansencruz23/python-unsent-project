@@ -27,6 +27,10 @@ def home(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    return render(request, 'home.html', {'letters': page_obj, 'count': count})
+
+
+def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -40,11 +44,7 @@ def home(request):
             messages.success(request, 'An error occurred. Try again')
             return redirect('home')
     else:
-        return render(request, 'home.html', {'letters': page_obj, 'count': count})
-
-
-def login_user(request):
-    pass
+        return render(request, 'login_user.html', {})
 
 
 def logout_user(request):
@@ -111,7 +111,7 @@ def add_letter(request):
         return render(request, 'add_letter.html', {'form': form, 'colors': colors.color_mappings.items})
     else:
         messages.success(request, 'You must be logged in to add letter')
-        return redirect('home')
+        return redirect('login_user')
 
 
 def update_letter(request, pk):
@@ -160,3 +160,7 @@ def view_user(request, pk):
 
 def about(request):
     return render(request, 'about.html', {})
+
+
+def mailbox(request):
+    return render(request, 'mailbox.html', {})

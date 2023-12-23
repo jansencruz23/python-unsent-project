@@ -6,11 +6,14 @@
     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse nav-center" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto d-flex justify-content-between">
         {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link nav-style" href="{% url 'home' %}">ARCHIVE</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-style" href="{% url 'mailbox' %}">MAILBOX</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav-style" href="{% url 'about' %}">ABOUT</a>
@@ -26,14 +29,20 @@
           <a class="btn btn-dark nav-style py-2 px-3 nav-btn" href="{% url 'add_letter' %}">SUBMIT</a>
         {% else %}
           <li class="nav-item">
-            <a class="nav-link nav-style" href="{% url 'home' %}">LOGIN</a>
+            <a class="nav-link nav-style" href="{% url 'home' %}">ARCHIVE</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-style" href="{% url 'about' %}">ABOUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-style" href="{% url 'login_user' %}">LOGIN</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav-style" href="{% url 'register' %}">REGISTER</a>
           </li>
+        </ul>
+          <a class="btn btn-dark nav-style py-2 px-3 nav-btn" href="{% url 'add_letter' %}">SUBMIT</a>
         {% endif %}
-
-      </ul>
     </div>
   </div>
 </nav>

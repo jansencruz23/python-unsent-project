@@ -7,7 +7,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    #path('login/', views.login_user, name='login'),
+    path('login_user/', views.login_user, name='login_user'),
     path('logout/', views.logout_user, name='logout'),
     path('register/', views.register_user, name='register'),
     path('letter/<int:pk>', views.view_letter, name='letter'),
@@ -17,6 +17,7 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('user/<int:pk>', views.view_user, name='view_user'),
     path('about', views.about, name='about'),
+    path('mailbox', views.mailbox, name='mailbox'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_URL)
