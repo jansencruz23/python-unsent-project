@@ -132,12 +132,13 @@ def profile(request):
     if request.user.is_authenticated:
         user = request.user
         letters = Letter.objects.filter(user_id=user.id)
+        count = letters.count()
 
         paginator = Paginator(letters, 30)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        return render(request, 'profile.html', {'letters': page_obj, 'user': user})
+        return render(request, 'profile.html', {'letters': page_obj, 'user': user, 'count': count})
     else:
         messages.success(request, 'You must be logged in to view profile')
         return redirect('home')
@@ -147,12 +148,13 @@ def view_user(request, pk):
     if request.user.is_authenticated:
         user = User.objects.get(id=pk)
         letters = Letter.objects.filter(user_id=pk, is_visible=True)
+        count = letters.count()
 
         paginator = Paginator(letters, 30)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        return render(request, 'view_user.html', {'letters': page_obj, 'user': user})
+        return render(request, 'view_user.html', {'letters': page_obj, 'user': user, 'count': count})
     else:
         messages.success(request, 'You must be logged in to view profile')
         return redirect('home')
@@ -166,12 +168,13 @@ def mailbox(request):
     if request.user.is_authenticated:
         user = request.user
         letters = Letter.objects.filter(recipient__icontains=user.username)
+        count = letters.count()
 
         paginator = Paginator(letters, 30)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
-        return render(request, 'mailbox.html', {'letters': page_obj, 'user': user})
+        return render(request, 'mailbox.html', {'letters': page_obj, 'user': user, 'count': count})
     else:
         messages.success(request, 'You must be logged in to view your mailbox')
         return redirect('login_user')
