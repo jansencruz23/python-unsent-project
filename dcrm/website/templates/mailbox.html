@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<h1 class="mt-5 d-flex justify-content-center fs-2">Mailbox</h1>
+<h5 class="mb-5 d-flex justify-content-center fs-6">Letters might be written for you</h5>
+
     {% if letters %}
         {% for letter in letters %}
             {% if forloop.counter0|divisibleby:3 %}

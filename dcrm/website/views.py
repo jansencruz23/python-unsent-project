@@ -163,4 +163,15 @@ def about(request):
 
 
 def mailbox(request):
-    return render(request, 'mailbox.html', {})
+    if request.user.is_authenticated:
+        user = request.user
+        letters = Letter.objects.filter(recipient__icontains=user.username)
+
+        paginator = Paginator(letters, 30)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        return render(request, 'mailbox.html', {'letters': page_obj, 'user': user})
+    else:
+        messages.success(request, 'You must be logged in to view your mailbox')
+        return redirect('login_user')
