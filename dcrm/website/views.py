@@ -285,3 +285,4 @@ def clear_notif(request):
     else:
         messages.success(request, 'You must be logged in to clear notifications')
         return redirect('login_user')
+    
