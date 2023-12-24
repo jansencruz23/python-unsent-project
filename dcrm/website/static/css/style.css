@@ -158,6 +158,10 @@ textarea:focus, textarea:focus{
         font-size: 1.5rem !important;
         font-family: 'Roboto';
     }
+
+    .nav-submit {
+        margin-top: 1em !important;
+    }
 }
 
 @media (max-width: 576px) {

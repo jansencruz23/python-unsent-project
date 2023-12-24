@@ -22,8 +22,8 @@ def home(request):
         letters = Letter.objects.all()
 
     letters = letters.order_by('created_at').reverse()
-    current_user = request.user
-    notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+    current_username = request.user.username
+    notifications = Notification.objects.filter(letter__recipient__iexact=current_username, is_read=False)
 
     count = letters.count()
 
@@ -83,8 +83,8 @@ def view_letter(request, pk):
     if request.user.is_authenticated:
         letter = Letter.objects.get(id=pk)
         username = User.objects.get(id=letter.user_id)
-        current_user = request.user
-        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+        current_user = request.user.username
+        notifications = Notification.objects.filter(letter__recipient__iexact=current_user, is_read=False)
 
         if letter.is_visible:
             return render(request, 'letter.html', {
@@ -107,9 +107,9 @@ def letter_notif(request, pk):
     if request.user.is_authenticated:
         letter = Letter.objects.get(id=pk)
         username = User.objects.get(id=letter.user_id)
-        current_user = request.user
+        current_user = request.user.username
 
-        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+        notifications = Notification.objects.filter(letter__recipient__iexact=current_user, is_read=False)
         notification = Notification.objects.get(letter__id=pk)
         notification.is_read = True
         notification.save()
@@ -145,8 +145,8 @@ def delete_letter(request, pk):
 def add_letter(request):
     form = AddLetterForm(request.POST or None)
     if request.user.is_authenticated:
-        current_user = request.user
-        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+        current_user = request.user.username
+        notifications = Notification.objects.filter(letter__recipient__iexact=current_user, is_read=False)
         if request.method == 'POST':
             if form.is_valid():
                 letter = form.save(commit=False)
@@ -174,8 +174,8 @@ def update_letter(request, pk):
         current_letter = Letter.objects.get(id=pk)
         form = AddLetterForm(request.POST or None, instance=current_letter)
 
-        current_user = request.user
-        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+        current_user = request.user.username
+        notifications = Notification.objects.filter(letter__recipient__iexact=current_user, is_read=False)
 
         if form.is_valid():
             form.save()
@@ -202,8 +202,8 @@ def profile(request):
         count = letters.count()
 
         letters = letters.order_by('created_at').reverse()
-        current_user = request.user
-        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+        current_user = request.user.username
+        notifications = Notification.objects.filter(letter__recipient__iexact=current_user, is_read=False)
 
         paginator = Paginator(letters, 30)
         page_number = request.GET.get('page')
@@ -226,8 +226,8 @@ def view_user(request, pk):
         count = letters.count()
 
         letters = letters.order_by('created_at').reverse()
-        current_user = request.user
-        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+        current_user = request.user.username
+        notifications = Notification.objects.filter(letter__recipient__iexact=current_user, is_read=False)
 
         paginator = Paginator(letters, 30)
         page_number = request.GET.get('page')
@@ -250,12 +250,12 @@ def about(request):
 def mailbox(request):
     if request.user.is_authenticated:
         user = request.user
-        letters = Letter.objects.filter(recipient=user.username)
+        letters = Letter.objects.filter(recipient__iexact=user.username)
         count = letters.count()
 
         letters = letters.order_by('created_at').reverse()
-        current_user = request.user
-        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+        current_user = request.user.username
+        notifications = Notification.objects.filter(letter__recipient__iexact=current_user, is_read=False)
 
         paginator = Paginator(letters, 30)
         page_number = request.GET.get('page')

@@ -26,12 +26,17 @@
                  data-bs-target="#staticBackdropLogout">LOG OUT</a>
           </li>
         </ul>
+      <ul class="navbar-nav d-flex justify-content-between">
+        <li>
           <button class="btn {% if notifications %}btn-dark{% else %}btn-white{% endif %} nav-notif py-2 px-3"
                   type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
               <i class="fa-solid fa-bell"></i>
           </button>
-            <a class="btn btn-dark nav-style py-2 px-3 nav-btn" href="{% url 'add_letter' %}">SUBMIT</a>
-
+          </li>
+        <li>
+            <a class="btn btn-dark nav-style py-2 px-3 nav-btn nav-submit" href="{% url 'add_letter' %}">SUBMIT</a>
+        </li>
+      </ul>
         {% else %}
           <li class="nav-item">
             <a class="nav-link nav-style" href="{% url 'home' %}">ARCHIVE</a>
@@ -78,7 +83,7 @@
   <div class="offcanvas-body">
     {% if notifications %}
         {% for notification in notifications %}
-           <div class="card">
+           <div class="card my-2 border-0 shadow-sm">
               <p class="card-header fs-6">
                 {% if notification.letter.is_visible %}
                 <a href="{% url 'view_user' notification.letter.user.id %}" class="text-decoration-none text-black">
@@ -88,8 +93,7 @@
                 {% endif %}
               </p>
               <div class="card-body">
-                <p class="card-title fs-6">{{ notification.letter.message }}</p>
-                <p class="card-text"></p>
+                <p class="card-text fs-6">{{ notification.letter.message }}</p>
                 <div class="d-flex justify-content-end">
                   <a href="{% url 'letter_notif' notification.letter.id %}"
                      class="btn btn-dark">View Letter</a>
