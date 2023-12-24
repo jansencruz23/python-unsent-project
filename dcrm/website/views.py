@@ -269,3 +269,19 @@ def mailbox(request):
     else:
         messages.success(request, 'You must be logged in to view your mailbox')
         return redirect('login_user')
+
+
+def clear_notif(request):
+    if request.user.is_authenticated:
+        current_user = request.user.username
+        notifications = Notification.objects.filter(letter__recipient__iexact=current_user, is_read=False)
+
+        for notification in notifications:
+            notification.is_read = True
+            notification.save()
+
+        messages.success(request, 'Notification have been cleared')
+        return redirect('home')
+    else:
+        messages.success(request, 'You must be logged in to clear notifications')
+        return redirect('login_user')

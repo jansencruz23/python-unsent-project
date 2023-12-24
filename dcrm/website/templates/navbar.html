@@ -82,6 +82,9 @@
   </div>
   <div class="offcanvas-body">
     {% if notifications %}
+      <div class="d-flex justify-content-end mb-3">
+        <a href="{% url 'clear_notif' %}" class="btn btn-danger">Clear Notifications</a>
+      </div>
         {% for notification in notifications %}
            <div class="card my-2 border-0 shadow-sm">
               <p class="card-header fs-6">

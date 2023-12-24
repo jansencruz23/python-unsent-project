@@ -19,6 +19,7 @@ urlpatterns = [
     path('about', views.about, name='about'),
     path('mailbox', views.mailbox, name='mailbox'),
     path('letter_notif/<int:pk>', views.letter_notif, name='letter_notif'),
+    path('clear_notif', views.clear_notif, name='clear_notif'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_URL)
