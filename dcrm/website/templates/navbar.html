@@ -71,19 +71,29 @@
 </div>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+  <div class="offcanvas-header bg-light">
+    <h5 id="offcanvasRightLabel" class="fs-5 m-2">Letters Notifications</h5>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     {% if notifications %}
         {% for notification in notifications %}
            <div class="card">
-              <h5 class="card-header">Letter Notification</h5>
+              <p class="card-header fs-6">
+                {% if notification.letter.is_visible %}
+                <a href="{% url 'view_user' notification.letter.user.id %}" class="text-decoration-none text-black">
+                  <strong>{{ notification.letter.user }}</strong></a> may have written a letter for you...
+                {% else %}
+                  Someone may have written a letter for you...
+                {% endif %}
+              </p>
               <div class="card-body">
-                <h5 class="card-title">{{ notification.letter.message }}</h5>
+                <p class="card-title fs-6">{{ notification.letter.message }}</p>
                 <p class="card-text"></p>
-                <a href="{% url 'letter_notif' notification.letter.id %}" class="btn btn-primary">View Letter</a>
+                <div class="d-flex justify-content-end">
+                  <a href="{% url 'letter_notif' notification.letter.id %}"
+                     class="btn btn-dark">View Letter</a>
+                </div>
               </div>
            </div>
         {% endfor %}

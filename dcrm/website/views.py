@@ -21,6 +21,7 @@ def home(request):
     else:
         letters = Letter.objects.all()
 
+    letters = letters.order_by('created_at').reverse()
     current_user = request.user
     notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
 
@@ -144,6 +145,8 @@ def delete_letter(request, pk):
 def add_letter(request):
     form = AddLetterForm(request.POST or None)
     if request.user.is_authenticated:
+        current_user = request.user
+        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
         if request.method == 'POST':
             if form.is_valid():
                 letter = form.save(commit=False)
@@ -159,7 +162,8 @@ def add_letter(request):
                 return redirect('home')
         return render(request, 'add_letter.html', {
             'form': form,
-            'colors': colors.color_mappings.items})
+            'colors': colors.color_mappings.items,
+            'notifications': notifications})
     else:
         messages.error(request, 'You must be logged in to add letter')
         return redirect('login_user')
@@ -169,6 +173,10 @@ def update_letter(request, pk):
     if request.user.is_authenticated:
         current_letter = Letter.objects.get(id=pk)
         form = AddLetterForm(request.POST or None, instance=current_letter)
+
+        current_user = request.user
+        notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
+
         if form.is_valid():
             form.save()
             messages.success(request, 'Letter has been updated')
@@ -180,7 +188,8 @@ def update_letter(request, pk):
             return redirect('home')
         return render(request, 'update_letter.html', {
             'form': form,
-            'colors': colors.color_mappings.items})
+            'colors': colors.color_mappings.items,
+            'notifications': notifications})
     else:
         messages.success(request, 'You must be logged in to update letter')
         return redirect('home')
@@ -192,6 +201,7 @@ def profile(request):
         letters = Letter.objects.filter(user_id=user.id)
         count = letters.count()
 
+        letters = letters.order_by('created_at').reverse()
         current_user = request.user
         notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
 
@@ -215,6 +225,7 @@ def view_user(request, pk):
         letters = Letter.objects.filter(user_id=pk, is_visible=True)
         count = letters.count()
 
+        letters = letters.order_by('created_at').reverse()
         current_user = request.user
         notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
 
@@ -242,6 +253,7 @@ def mailbox(request):
         letters = Letter.objects.filter(recipient=user.username)
         count = letters.count()
 
+        letters = letters.order_by('created_at').reverse()
         current_user = request.user
         notifications = Notification.objects.filter(letter__recipient=current_user, is_read=False)
 
